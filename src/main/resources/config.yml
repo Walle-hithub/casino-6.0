@@ -1,0 +1,133 @@
+# ===== Casino - Configuracion =====
+# IMPORTANTE: si vienes de una version anterior, borra este archivo para que se regenere.
+prefix: "&6[&eCasino&6] &f"
+
+# Ficha de poker: es un item. Se marca internamente, asi que solo valen las fichas creadas por el plugin.
+chips:
+  material: GOLD_NUGGET
+  name: "&6&lFicha de Poker"
+  lore:
+    - "&7Moneda oficial del casino"
+    - "&7Cambiala por minerales en la caja"
+
+bet:
+  min: 1            # apuesta minima (en fichas)
+  max: 500          # apuesta maxima (en fichas)
+  cooldown-seconds: 2
+
+# Caja de cambio: minerales <-> fichas
+exchange:
+  command-enabled: true      # permite abrir la caja con /casino cambio desde cualquier sitio
+  rates:
+    DIAMOND:
+      buy: 100               # fichas que recibes por 1 mineral
+      sell: 100              # fichas que pagas para recibir 1 mineral
+    EMERALD:
+      buy: 50
+      sell: 50
+    GOLD_INGOT:
+      buy: 10
+      sell: 10
+    IRON_INGOT:
+      buy: 2
+      sell: 2
+    NETHERITE_INGOT:
+      buy: 1000
+      sell: 1000
+
+# Tragaperras. Cada simbolo tiene:
+#   weight: probabilidad relativa (mas alto = sale mas)
+#   triple: multiplicador si salen 3 iguales
+#   pair:   multiplicador si salen exactamente 2 iguales (0 = sin premio)
+# Con estos valores: retorno al jugador ~89%, premio en ~22% de las tiradas.
+# Los multiplicadores con decimales se redondean al azar (sin perder retorno medio).
+slots:
+  symbols:
+    DIAMOND:
+      weight: 1
+      triple: 100
+      pair: 3
+    EMERALD:
+      weight: 2
+      triple: 40
+      pair: 2
+    GOLD_INGOT:
+      weight: 3
+      triple: 15
+      pair: 1.5
+    REDSTONE:
+      weight: 4
+      triple: 8
+      pair: 0
+    COAL:
+      weight: 5
+      triple: 6
+      pair: 0
+
+coinflip:
+  win-chance: 0.48          # si ganas recibes el doble
+
+dice:
+  win-multiplier: 2.0       # 2 dados contra la casa; empate = gana la casa (~89% de retorno)
+
+roulette:
+  color-multiplier: 2.0     # 13 casillas: 0 verde, 1-12 rojo/negro alternados
+  green-multiplier: 12.0    # retorno ~92%
+
+blackjack:
+  blackjack-multiplier: 2.5       # pago total del Blackjack natural (2.5 = 3:2). Pon 2.2 para 6:5
+  dealer-hits-soft-17: false      # true = el crupier pide con 17 blando (mas ventaja para la casa)
+
+# Maquina del Tesoro: cada giro cuesta fichas y SIEMPRE da un premio (items reales).
+# Cada premio:  item, amount, value (valor en fichas), enchants (opcional) y weight (opcional).
+# Si no pones weight, la probabilidad sale del valor: cuanto mas valioso, menos probable
+# (weight = 1000 / value). Con weight lo controlas tu a mano.
+# Los jugadores ven cada premio y su probabilidad con /casino premios o el boton de la maquina.
+# Con estos valores el retorno medio es ~88% (se muestra tambien en la consola al arrancar).
+treasure:
+  cost: 65
+  broadcast-value: 300      # los premios con valor >= este numero se anuncian a todo el servidor
+  rewards:
+    - item: IRON_INGOT
+      amount: 8
+      value: 16
+    - item: LAPIS_LAZULI
+      amount: 16
+      value: 20
+    - item: EXPERIENCE_BOTTLE
+      amount: 8
+      value: 30
+    - item: GOLD_INGOT
+      amount: 4
+      value: 40
+    - item: GOLDEN_APPLE
+      amount: 2
+      value: 60
+    - item: EXPERIENCE_BOTTLE
+      amount: 32
+      value: 120
+    - item: ENCHANTED_BOOK
+      amount: 1
+      value: 120
+      enchants:
+        protection: 4
+    - item: EMERALD
+      amount: 3
+      value: 150
+    - item: DIAMOND
+      amount: 2
+      value: 200
+    - item: ENCHANTED_BOOK
+      amount: 1
+      value: 250
+      enchants:
+        mending: 1
+    - item: TOTEM_OF_UNDYING
+      amount: 1
+      value: 300
+    - item: ENCHANTED_GOLDEN_APPLE
+      amount: 1
+      value: 400
+    - item: NETHERITE_INGOT
+      amount: 1
+      value: 1000

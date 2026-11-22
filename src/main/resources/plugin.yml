@@ -1,0 +1,17 @@
+name: Casino
+version: 2.1.0
+main: com.casino.CasinoPlugin
+api-version: '1.21'
+description: Casino con fichas de poker, tragaperras, ruleta, blackjack y mas.
+commands:
+  casino:
+    description: Comando principal del casino
+    usage: /casino
+    aliases: [casinos]
+permissions:
+  casino.play:
+    description: Permite jugar en el casino
+    default: true
+  casino.admin:
+    description: Construir maquinas, dar fichas y recargar
+    default: op
